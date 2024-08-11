@@ -1,9 +1,24 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+
 const GsapText = () => {
   // TODO: Implement gsap text animation
+  useGSAP(() => {
+    gsap.to("#text", {
+      opacity: 1,
+      y: 0,
+      delay: 0.5,
+    });
+    gsap.fromTo(
+      ".para",
+      { opacity: 0, y: 20,ease:'power1.inOut' },
+      { opacity: 1, y: 0, delay: 1, stagger: 0.5 }
+    );
+  }, []);
 
   return (
-    <main>
-      <h1 id="text" className="opacity-0 translate-y-10">
+    <main className="m-4">
+      <h1 id="text" className="opacity-0 translate-y-10 text-3xl">
         GsapText
       </h1>
 
@@ -22,18 +37,6 @@ const GsapText = () => {
         For more advanced text animations and effects, you can explore the GSAP
         TextPlugin or other third-party libraries that specialize in text
         animations.
-      </p>
-
-      <p className="mt-5 text-gray-500 para">
-        Read more about the{" "}
-        <a
-          href="https://greensock.com/docs/v3/Plugins/TextPlugin"
-          target="_blank"
-          rel="noreferrer noopener nofollow"
-        >
-          TextPlugin
-        </a>{" "}
-        plugin.
       </p>
     </main>
   );

@@ -26,10 +26,10 @@ export default function Animation() {
   };
 
   return (
-    <div>
+    <div >
       <h1 className="text-xl uppercase text-green-400 my-4">Animations using GSAP</h1>
       <div>
-        <ul className="flex items-center border justify-between">
+        <ul className="flex items-center border justify-between ">
           {animations.map((animation, index) => (
             <li
               key={index}
@@ -43,7 +43,7 @@ export default function Animation() {
           ))}
         </ul>
       </div>
-      <div className="mt-4 border bg-white">
+      <div className="rounded-b-3xl px-4 border bg-white">
         {renderComponent()}
       </div>
     </div>

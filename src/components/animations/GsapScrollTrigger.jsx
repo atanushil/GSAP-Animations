@@ -1,35 +1,38 @@
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+import { ScrollTrigger } from "gsap/all";
+import gsap from "gsap";
+gsap.registerPlugin(ScrollTrigger);
 const GsapScrollTrigger = () => {
-  // TODO: Implement the gsap scroll trigger
+  const scrollRef = useRef();
+
+  useGSAP(
+    () => {
+      const boxes = gsap.utils.toArray(scrollRef.current.children);
+      boxes.forEach((box) => {
+        gsap.to(box, {
+          x: "45vw",
+          rotation: 360,
+          scale: 1.5,
+          borderRadius: "100%",
+          scrollTrigger: {
+            trigger: box,
+            start: "bottom bottom",
+            end: "top 20%",
+            scrub: true,
+          },
+          ease: "power1.inOut",
+        });
+      });
+    },
+    { scope: scrollRef }
+  );
 
   return (
     <main>
-      <h1>GsapScrollTrigger</h1>
+      <p className="text-4xl text-pink-400">GsapScrollTrigger</p>
 
-      <p className="mt-5 text-gray-500">
-        Gsap Scroll Trigger is a plugin that allows you to create animations
-        that are triggered by the scroll position of the page.
-      </p>
-
-      <p className="mt-5 text-gray-500">
-        With ScrollTrigger, you can define various actions to be triggered at
-        specific scroll points, such as starting or ending an animation,
-        scrubbing through animations as the user scrolls, pinning elements to
-        the screen, and more.{" "}
-      </p>
-
-      <p className="mt-5 text-gray-500">
-        Read more about the{" "}
-        <a
-          href="https://gsap.com/docs/v3/Plugins/ScrollTrigger/"
-          target="_blank"
-          rel="noreferrer noopener nofollow"
-        >
-          gsap scroll trigger
-        </a>{" "}
-        method.
-      </p>
-
-      <div className="w-full h-[70vh] flex justify-center items-center flex-col">
+      <div className="w-full h-[80vh] flex justify-center  items-center flex-col">
         <p className="text-center text-gray-500">
           Scroll down to see the animation
         </p>
@@ -51,7 +54,7 @@ const GsapScrollTrigger = () => {
         </svg>
       </div>
 
-      <div className="mt-20 w-full h-screen">
+      <div className="mt-20 w-full h-screen" ref={scrollRef}>
         <div
           id="scroll-pink"
           className="scroll-box w-20 h-20 rounded-lg bg-pink-500"
